@@ -17,7 +17,7 @@ setup(
     packages=[
         "django_auth_ldap",
     ],
-    long_description=read("README.markdown"),
+    long_description=read("README.md"),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Framework :: Django",
