@@ -51,6 +51,7 @@ import traceback
 import pprint
 import copy
 
+from django import db
 from django.contrib.auth.models import User, Group, Permission
 from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured, ObjectDoesNotExist
@@ -554,13 +555,18 @@ class _LDAPUser(object):
                 save_user = True
 
         if save_user:
+            logger.debug("Saving Django user %s", username)
             self._user.save()
 
         # We populate the profile after the user model is saved to give the
         # client a chance to create the profile. Custom user models in Django
         # 1.5 probably won't have a get_profile method.
         if should_populate and hasattr(self._user, 'get_profile'):
+            logger.debug("Populating Django user Profile %s", username)
             self._populate_and_save_user_profile()
+
+        # Close the connection, if the client have dropped in the middle of a sync
+        db.close_connection()
 
     def _populate_user(self):
         """
