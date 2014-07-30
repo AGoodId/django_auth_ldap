@@ -1,3 +1,11 @@
+This is a fork of [django\_auth\_ldap](https://pythonhosted.org/django-auth-ldap/) with additional modifications
+to suit our needs. It's recommended that you use the official repository.
+
+Differences:
+
+* More verbose debugging logs
+* Trying to close connection after populating users
+
 LICENCE
 =======
 Copyright (c) 2009, Peter Sagerson All rights reserved.
