@@ -433,9 +433,7 @@ class _LDAPUser(object):
             sticky = self.settings.BIND_AS_AUTHENTICATING_USER
 
             self._bind_as(self.dn, password, sticky=sticky)
-            print "HEYOOOO"
         except ldap.INVALID_CREDENTIALS:
-            print "AUTH FAILED"
             raise self.AuthenticationFailed("User DN/password rejected by LDAP server.")
 
     def _load_user_attrs(self):
